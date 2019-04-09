@@ -24,23 +24,26 @@
 
 <script>
 import axios from 'axios'
-
+import { convertDate } from '@/utils'
+import { API_KEY } from '@/utils/constants'
 export default {
   data() {
     return {
       articles: '',
-      category: this.$route.params.category
+      category: this.$route.params.category,
+      convertDate
     }
   },
   mounted() {
+    console.log(this.category)
     this.infiniteScroll()
   },
-  created: function() {
+  created() {
     axios
       .get(
         `https://newsapi.org/v2/top-headlines?country=kr&category=${
           this.category
-        }&apiKey=602cd3b6051a451d8e99935b8e7cad01`
+        }&apiKey=${API_KEY}`
       )
       .then(
         response => {
@@ -64,7 +67,7 @@ export default {
             .get(
               `https://newsapi.org/v2/top-headlines?country=kr&pageSize=40&category=${
                 this.category
-              }&apiKey=602cd3b6051a451d8e99935b8e7cad01`
+              }&apiKey=${API_KEY}`
             )
             .then(
               response => {

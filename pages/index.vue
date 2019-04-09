@@ -60,8 +60,7 @@ export default {
       loading: false,
       headLine: '',
       isActive: false,
-      convertDate: convertDate,
-      // comm: comm,
+      convertDate,
       newsList: {
         business: [],
         entertainment: [],
@@ -84,7 +83,7 @@ export default {
         console.log(err)
       })
     CATEGORY.forEach(item => {
-      this.getCategoryNews(item)
+      this.getCategoryNews(item.en)
     })
   },
   methods: {
@@ -97,7 +96,7 @@ export default {
     getCategoryNews(category) {
       axios
         .get(
-          `https://newsapi.org/v2/top-headlines?country=kr&category=${category}&pageSize=4&apiKey=602cd3b6051a451d8e99935b8e7cad01`
+          `https://newsapi.org/v2/top-headlines?country=kr&category=${category}&pageSize=4&apiKey=${API_KEY}`
         )
         .then(response => {
           this.newsList[category] = [...response.data.articles]
