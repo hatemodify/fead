@@ -1,0 +1,18 @@
+@mixin cf {
+  &:after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+}
+@mixin icoPath {
+  background-image: url("../images/ico_fead.png");
+}
+
+@mixin lineClamp($num) {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: $num;
+  -webkit-box-orient: vertical;
+}

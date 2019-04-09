@@ -1,12 +1,23 @@
 <template>
-  <div class="preloader">
-    <span class="left"></span>
-    <span class="right"></span>
-    <span class="preloader_txt"></span>
+  <div class="wrap_preloader">
+    <div class="preloader">
+      <span class="left"></span>
+      <span class="right"></span>
+      <span class="preloader_txt"></span>
+    </div>
   </div>
 </template>
 
 <style lang="scss">
+.wrap_preloader {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+  z-index: 999;
+}
 .preloader {
   position: fixed;
   width: 75px;

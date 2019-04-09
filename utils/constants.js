@@ -7,3 +7,11 @@ export const CATEGORY = [
   'health',
   'science'
 ]
+export const bgList = {
+  bgBusiness: '../assets/images/bg_business.png',
+  bgSports: '../assets/images/bg_sports.png',
+  bgHealth: '../assets/images/bg_health.png',
+  bgScience: '../assets/images/bg_science.png',
+  bgGeneral: '../assets/images/bg_general.png',
+  bgEntertainment: '../assets/images/bg_entertainment.png'
+}
