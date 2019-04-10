@@ -80,9 +80,6 @@ export default {
         }
       })
     }
-  },
-  updated() {
-    // this.animation()
   }
 }
 </script>

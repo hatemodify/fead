@@ -94,11 +94,12 @@ export default {
         .then(response => {
           this.newsList[category] = [...response.data.articles]
         })
+    },
+    errImg(img) {
+      console.log(img)
     }
-  },
-  errImg(img) {
-    img = require('@/assets/images/no_img.png')
   }
+
   // updated() {
   //   this.loading = true
   //   const a = document.getElementById('app')

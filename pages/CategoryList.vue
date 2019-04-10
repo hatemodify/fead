@@ -2,7 +2,10 @@
   <!-- <router-link v-bind:to="{ name: 'Search' , params: { query: query } }" class="btn_search"></router-link> -->
   <ul class="list_category">
     <li v-for="cate in CATEGORY" :key="cate" v-bind:id="cate.en">
-      <nuxt-link v-bind:to="{ name: 'category' , params: { category: cate.en }}" class="link_item">
+      <nuxt-link
+        v-bind:to="{ name: 'category-category' , params: { category: cate.en }}"
+        class="link_item"
+      >
         <span class="tit_cate">
           {{cate.en}}
           <span class="name_ko">{{cate.ko}}</span>
