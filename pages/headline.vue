@@ -97,10 +97,10 @@ export default {
             alert(error)
           }
         )
+    },
+    errImg(img) {
+      img = require('@/assets/images/no_img.png')
     }
-  },
-  errImg(img) {
-    img = require('@/assets/images/no_img.png')
   }
 }
 </script>
