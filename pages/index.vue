@@ -6,10 +6,10 @@
         <li v-for="item in headLine" :key="item.title">
           <button class="btn_scrap"></button>
           <a :href="item.url" class="link_item" target="_blank">
-            <picture v-if="item.urlToImage" class="wrap_thumb">
-              <img :src="item.urlToImage" class="thumb_img" alt>
+            <picture class="wrap_thumb">
+              <img :src="item.urlToImage" @onerror="errImg(item.urlToImage)" class="thumb_img" alt>
             </picture>
-            <div v-else class="wrap_thumb no_img"></div>
+            <!-- <div v-else class="wrap_thumb no_img"></div> -->
           </a>
           <div class="wrap_info">
             <strong class="tit_news">{{item.title}}</strong>
@@ -52,7 +52,7 @@ import axios from 'axios'
 import { preloader } from '@/components'
 import { API_KEY, CATEGORY } from '@/utils/constants'
 import { convertDate } from '@/utils'
-// import comm from '../services/common.js'
+
 export default {
   components: { preloader },
   data() {
@@ -71,7 +71,6 @@ export default {
       }
     }
   },
-  mounted() {},
   created() {
     axios
       .get(`https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`)
@@ -87,12 +86,6 @@ export default {
     })
   },
   methods: {
-    errorImg() {
-      console.log('error img')
-    },
-    txtEncode(txt) {
-      return JSON.stringify(txt)
-    },
     getCategoryNews(category) {
       axios
         .get(
@@ -102,6 +95,9 @@ export default {
           this.newsList[category] = [...response.data.articles]
         })
     }
+  },
+  errImg(img) {
+    img = require('@/assets/images/no_img.png')
   }
   // updated() {
   //   this.loading = true
