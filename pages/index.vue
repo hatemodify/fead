@@ -6,9 +6,7 @@
         <li v-for="item in headLine" :key="item.title">
           <button class="btn_scrap"></button>
           <a :href="item.url" class="link_item" target="_blank">
-            <picture class="wrap_thumb">
-              <img :src="item.urlToImage" @error="errImg" class="thumb_img" alt>
-            </picture>
+            <news-thumb :imgSource="item.urlToImage"/>
           </a>
           <div class="wrap_info">
             <strong class="tit_news">{{item.title}}</strong>
@@ -30,9 +28,7 @@
       <ul class="list_cate">
         <li v-for="(item ,idx) in newsList[key]" :key="idx">
           <a :href="item.url" class="link_item" target="_blank">
-            <picture class="wrap_thumb">
-              <img :src="item.urlToImage" @error="errImg" class="thumb_img" alt>
-            </picture>
+            <news-thumb :imgSource="item.urlToImage"/>
             <div class="wrap_info">
               <span class="txt_source">{{item.source.name}}</span>
               <strong class="tit_news">{{item.title}}</strong>
@@ -47,19 +43,17 @@
 
 <script>
 import axios from 'axios'
-import { preloader } from '@/components'
+import { Preloader, NewsThumb } from '@/components'
 import { API_KEY, CATEGORY } from '@/utils/constants'
-import { convertDate, errImg } from '@/utils'
+import { convertDate } from '@/utils'
 
 export default {
-  components: { preloader },
   data() {
     return {
       loading: false,
       headLine: '',
       isActive: false,
       convertDate,
-      errImg,
       newsList: {
         business: [],
         entertainment: [],
@@ -68,6 +62,18 @@ export default {
         health: [],
         science: []
       }
+    }
+  },
+  components: { Preloader, NewsThumb },
+  methods: {
+    getCategoryNews(category) {
+      axios
+        .get(
+          `https://newsapi.org/v2/top-headlines?country=kr&category=${category}&pageSize=4&apiKey=${API_KEY}`
+        )
+        .then(response => {
+          this.newsList[category] = [...response.data.articles]
+        })
     }
   },
   created() {
@@ -83,17 +89,6 @@ export default {
     CATEGORY.forEach(item => {
       this.getCategoryNews(item.en)
     })
-  },
-  methods: {
-    getCategoryNews(category) {
-      axios
-        .get(
-          `https://newsapi.org/v2/top-headlines?country=kr&category=${category}&pageSize=4&apiKey=${API_KEY}`
-        )
-        .then(response => {
-          this.newsList[category] = [...response.data.articles]
-        })
-    }
   }
 
   // updated() {

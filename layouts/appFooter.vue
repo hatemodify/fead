@@ -36,7 +36,7 @@ export default {
   //     ? (this.$store.state.accessToken = localStorage.accessToken)
   //     : null
   // },
-  updated() {},
+
   methods: {
     activeSearch: function() {
       const searchForm = document.querySelector('.search_form')

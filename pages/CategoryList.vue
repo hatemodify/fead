@@ -29,7 +29,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scrope>
 .list_category li {
   @for $i from 1 through 6 {
     &:nth-child(#{$i}) {

@@ -32,7 +32,6 @@
 </template>
 <script>
 export default {
-  name: 'sideMenu',
   props: ['chkLogin'],
   data() {
     return {

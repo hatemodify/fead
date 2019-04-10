@@ -6,15 +6,14 @@
   </div>
 </template>
 <script>
-import appHeader from './appHeader'
-import appFooter from './appFooter'
-import { convertDate, erroImg } from '@/utils'
+import AppHeader from './AppHeader'
+import AppFooter from './AppFooter'
+import { convertDate } from '@/utils'
 export default {
-  components: { appHeader, appFooter },
+  components: { AppHeader, AppFooter },
   data() {
     return {
-      convertDate,
-      erroImg
+      convertDate
     }
   }
 }

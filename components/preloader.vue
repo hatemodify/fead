@@ -7,8 +7,12 @@
     </div>
   </div>
 </template>
-
-<style lang="scss">
+<script>
+export default {
+  name: 'preLoader'
+}
+</script>
+<style lang="scss" scope>
 .wrap_preloader {
   position: absolute;
   top: 0;
@@ -95,5 +99,4 @@
   }
 }
 </style>
-<script>
-</script>
+

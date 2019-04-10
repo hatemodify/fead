@@ -4,9 +4,7 @@
       <li v-for="item in headLine" :key="item.title">
         <button class="btn_scrap" :class="{'active': isActive}" @click="thisScrap(item)"></button>
         <a :href="item.url" class="link_item">
-          <picture class="wrap_thumb">
-            <img :src="item.urlToImage" @error="errImg" class="thumb_img" alt>
-          </picture>
+          <news-thumb :imgSource="item.urlToImage"/>
         </a>
         <div class="wrap_info">
           <span class="txt_source">{{item.source.name}}</span>
@@ -23,41 +21,17 @@
 
 <script>
 import axios from 'axios'
-import { convertDate, errImg } from '@/utils'
+import { Preloader, NewsThumb } from '@/components'
+import { convertDate } from '@/utils'
 export default {
+  components: { NewsThumb },
   data() {
     return {
       headLine: '',
       isActive: false,
       loading: false,
-      errorImg: '~assets/images/no_img.png',
-      convertDate: convertDate
+      convertDate
     }
-  },
-  created() {
-    axios
-      .get(
-        'https://newsapi.org/v2/top-headlines?country=kr&apiKey=602cd3b6051a451d8e99935b8e7cad01'
-      )
-      .then(
-        response => {
-          response.data.articles.forEach(element => {
-            if (element.urlToImage) {
-              element.urlToImage = element.urlToImage
-                .toString()
-                .replace('http:', '')
-            }
-          })
-          this.headLine = response.data.articles
-          this.loading = true
-        },
-        error => {
-          alert(error)
-        }
-      )
-  },
-  mounted() {
-    this.infiniteScroll()
   },
   methods: {
     async thisScrap(val) {
@@ -97,6 +71,24 @@ export default {
           }
         )
     }
+  },
+  created() {
+    axios
+      .get(
+        'https://newsapi.org/v2/top-headlines?country=kr&apiKey=602cd3b6051a451d8e99935b8e7cad01'
+      )
+      .then(
+        response => {
+          this.headLine = response.data.articles
+          this.loading = true
+        },
+        error => {
+          alert(error)
+        }
+      )
+  },
+  mounted() {
+    this.infiniteScroll()
   }
 }
 </script>

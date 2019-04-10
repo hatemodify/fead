@@ -21,9 +21,8 @@
 
 <script>
 import axios from 'axios'
-import sideMenu from './sideMenu'
+import SideMenu from './SideMenu'
 export default {
-  components: { sideMenu },
   data() {
     return {
       isActive: false,
@@ -35,6 +34,7 @@ export default {
       user: ''
     }
   },
+  components: { SideMenu },
   watch: {
     reSearch() {
       this.searchQuery = '검색어를 입력하세요'
