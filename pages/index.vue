@@ -7,7 +7,7 @@
           <button class="btn_scrap"></button>
           <a :href="item.url" class="link_item" target="_blank">
             <picture class="wrap_thumb">
-              <img :src="item.urlToImage" @onerror="errImg(item.urlToImage)" class="thumb_img" alt>
+              <img :src="item.urlToImage" @error="errImg(item.urlToImage)" class="thumb_img" alt>
             </picture>
             <!-- <div v-else class="wrap_thumb no_img"></div> -->
           </a>

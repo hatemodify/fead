@@ -5,7 +5,7 @@
         <button class="btn_scrap" :class="{'active': isActive}" @click="thisScrap(item)"></button>
         <a :href="item.url" class="link_item">
           <picture class="wrap_thumb" v-if="item.urlToImage">
-            <img :src="item.urlToImage" class="thumb_img" alt>
+            <img :src="item.urlToImage" @error="errImg(item.urlToImage)" class="thumb_img" alt>
           </picture>
           <div class="wrap_thumb no_img" v-else></div>
         </a>
@@ -57,7 +57,6 @@ export default {
         }
       )
   },
-  updated() {},
   mounted() {
     this.infiniteScroll()
   },
@@ -99,6 +98,9 @@ export default {
           }
         )
     }
+  },
+  errImg(img) {
+    img = require('@/assets/images/no_img.png')
   }
 }
 </script>
