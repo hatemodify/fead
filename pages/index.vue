@@ -26,13 +26,17 @@
     <div class="wrap_category" v-for="(cate,key) in newsList" :key="key">
       <h3 class="tit_cate">
         {{key}}
-        <router-link :to="`/category/${cate}`" class="link_more">주제 더보기</router-link>
+        <router-link :to="`/category/${key}`" class="link_more">주제 더보기</router-link>
       </h3>
       <ul class="list_cate">
         <li v-for="(item ,idx) in newsList[key]" :key="idx">
           <a :href="item.url" class="link_item" target="_blank">
             <picture class="wrap_thumb" v-if="item.urlToImage">
-              <img :src="item.urlToImage" class="thumb_img" alt>
+              <img
+                :src="item.urlToImage || require('@/assets/images/no_img.png')"
+                class="thumb_img"
+                alt
+              >
             </picture>
             <div class="wrap_thumb no_img" v-else></div>
             <div class="wrap_info">
@@ -96,7 +100,7 @@ export default {
         })
     },
     errImg(img) {
-      console.log(img)
+      img = require('@/assets/images/no_img.png')
     }
   }
 
