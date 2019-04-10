@@ -3,13 +3,26 @@
 @import "layout";
 
 .no_img {
-  height: 220px;
-  border-right: 0 none;
-  background: url("../images/no_img.png") no-repeat center;
-  background-size: 80px auto;
+  position: relative;
+  height: 100px;
+  &:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: url("../images/no_img.png") no-repeat center;
+    background-size: 50px auto;
+    content: "";
+  }
   &:after {
     border: 1px solid rgba(0, 0, 0, 0.15) !important;
   }
+}
+.img_default {
+  display: block;
+  width: 50px;
+  margin: 20px auto 0;
 }
 
 .thumb_img {

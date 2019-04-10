@@ -4,10 +4,9 @@
     <ul class="list_news">
       <li v-for="item in articles" :key="item.id">
         <a :href="item.url">
-          <picture class="wrap_thumb" v-if="item.urlToImage">
-            <img :src="item.urlToImage" class="thumb_img" alt>
+          <picture class="wrap_thumb">
+            <img :src="item.urlToImage" @error="errImg" class="thumb_img" alt>
           </picture>
-          <div class="wrap_thumb no_img" v-else></div>
           <div class="wrap_info">
             <strong class="news_subject">{{item.title}}</strong>
             <p class="news_desc">{{item.description}}</p>
@@ -26,10 +25,12 @@
 import axios from 'axios'
 import { convertDate } from '@/utils'
 import { API_KEY } from '@/utils/constants'
+import { errImg } from '@/utils'
 export default {
   data() {
     return {
       articles: '',
+      errImg,
       category: this.$route.params.category,
       convertDate
     }

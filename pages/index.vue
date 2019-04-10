@@ -7,9 +7,8 @@
           <button class="btn_scrap"></button>
           <a :href="item.url" class="link_item" target="_blank">
             <picture class="wrap_thumb">
-              <img :src="item.urlToImage" @error="errImg(item.urlToImage)" class="thumb_img" alt>
+              <img :src="item.urlToImage" @error="errImg" class="thumb_img" alt>
             </picture>
-            <!-- <div v-else class="wrap_thumb no_img"></div> -->
           </a>
           <div class="wrap_info">
             <strong class="tit_news">{{item.title}}</strong>
@@ -31,14 +30,9 @@
       <ul class="list_cate">
         <li v-for="(item ,idx) in newsList[key]" :key="idx">
           <a :href="item.url" class="link_item" target="_blank">
-            <picture class="wrap_thumb" v-if="item.urlToImage">
-              <img
-                :src="item.urlToImage || require('@/assets/images/no_img.png')"
-                class="thumb_img"
-                alt
-              >
+            <picture class="wrap_thumb">
+              <img :src="item.urlToImage" @error="errImg" class="thumb_img" alt>
             </picture>
-            <div class="wrap_thumb no_img" v-else></div>
             <div class="wrap_info">
               <span class="txt_source">{{item.source.name}}</span>
               <strong class="tit_news">{{item.title}}</strong>
@@ -55,7 +49,7 @@
 import axios from 'axios'
 import { preloader } from '@/components'
 import { API_KEY, CATEGORY } from '@/utils/constants'
-import { convertDate } from '@/utils'
+import { convertDate, errImg } from '@/utils'
 
 export default {
   components: { preloader },
@@ -65,6 +59,7 @@ export default {
       headLine: '',
       isActive: false,
       convertDate,
+      errImg,
       newsList: {
         business: [],
         entertainment: [],
@@ -98,9 +93,6 @@ export default {
         .then(response => {
           this.newsList[category] = [...response.data.articles]
         })
-    },
-    errImg(img) {
-      img = require('@/assets/images/no_img.png')
     }
   }
 

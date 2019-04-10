@@ -4,10 +4,9 @@
       <li v-for="item in headLine" :key="item.title">
         <button class="btn_scrap" :class="{'active': isActive}" @click="thisScrap(item)"></button>
         <a :href="item.url" class="link_item">
-          <picture class="wrap_thumb" v-if="item.urlToImage">
-            <img :src="item.urlToImage" @error="errImg(item.urlToImage)" class="thumb_img" alt>
+          <picture class="wrap_thumb">
+            <img :src="item.urlToImage" @error="errImg" class="thumb_img" alt>
           </picture>
-          <div class="wrap_thumb no_img" v-else></div>
         </a>
         <div class="wrap_info">
           <span class="txt_source">{{item.source.name}}</span>
@@ -24,7 +23,7 @@
 
 <script>
 import axios from 'axios'
-import { convertDate } from '@/utils'
+import { convertDate, errImg } from '@/utils'
 export default {
   data() {
     return {
@@ -97,9 +96,6 @@ export default {
             alert(error)
           }
         )
-    },
-    errImg(img) {
-      img = require('@/assets/images/no_img.png')
     }
   }
 }

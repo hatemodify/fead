@@ -8,12 +8,13 @@
 <script>
 import appHeader from './appHeader'
 import appFooter from './appFooter'
-import { convertDate } from '@/utils'
+import { convertDate, erroImg } from '@/utils'
 export default {
   components: { appHeader, appFooter },
   data() {
     return {
-      convertDate: convertDate
+      convertDate,
+      erroImg
     }
   }
 }

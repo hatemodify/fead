@@ -3,13 +3,13 @@
     <div class="inner">
       <div class="wrap_profile" v-if="chkLogin !== 'null'">
         <picture class="wrap_thumb">
-          <img :src="profileImgPath" class="thumb_img" alt>
+          <img src="@/assets/images/thumb_user.png" class="thumb_img" alt>
         </picture>
         <strong class="user_name">{{user}}</strong>
       </div>
       <div class="wrap_profile" v-else>
         <picture class="wrap_thumb no_profile">
-          <img src="@/assets/images/thumb_user.png" class="thumb_img" alt>
+          <img :src="defaultProfile" class="thumb_img" alt>
         </picture>
         <strong class="txt_login">로그인 하시면 더 많은 서비스를 이용하실 수 있습니다.</strong>
         <router-link to="/login" @click="activeMenu">로그인</router-link>
@@ -35,7 +35,9 @@ export default {
   name: 'sideMenu',
   props: ['chkLogin'],
   data() {
-    return {}
+    return {
+      defaultProfile: require(`@/assets/images/thumb_user.png`)
+    }
   }
 }
 </script>

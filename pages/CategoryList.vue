@@ -1,7 +1,7 @@
 <template>
   <!-- <router-link v-bind:to="{ name: 'Search' , params: { query: query } }" class="btn_search"></router-link> -->
   <ul class="list_category">
-    <li v-for="cate in CATEGORY" :key="cate" v-bind:id="cate.en">
+    <li v-for="cate in CATEGORY" :key="cate.en" v-bind:id="cate.en">
       <nuxt-link
         v-bind:to="{ name: 'category-category' , params: { category: cate.en }}"
         class="link_item"

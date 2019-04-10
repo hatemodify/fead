@@ -5,3 +5,6 @@ export const convertDate = date => {
 export const txtEncode = txt => {
   return JSON.stringify(txt)
 }
+export const errImg = e => {
+  return (e.target.parentElement.classList = 'no_img')
+}
