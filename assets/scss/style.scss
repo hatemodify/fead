@@ -167,14 +167,17 @@
   }
   .tit_news {
     display: -webkit-box;
+    box-orient: vertical;
+    -webkit-box-orient: vertical;
     overflow: hidden;
     margin: 10px 0 15px;
+    height: 50px;
     font-size: 20px;
     line-height: 60/48 * 100%;
     word-break: keep-all;
+    text-overflow: ellipsis;
     color: #242424;
     -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
   }
   .txt_source {
     font-size: 13px;
@@ -184,6 +187,7 @@
 }
 
 .list_category {
+  margin-top: -20px;
   height: calc(100vh - 91px);
   li {
     position: relative;
@@ -287,9 +291,7 @@
     width: 100%;
   }
 }
-.category_cont {
-  padding-top: 50px;
-}
+
 .wrap_inp {
   overflow: hidden;
   margin-top: 40px;
@@ -402,6 +404,7 @@
     width: 90px;
     padding-bottom: 3px;
     color: inherit;
+    font-size: 11px;
     &:after {
       position: absolute;
       bottom: 0;
@@ -417,7 +420,7 @@
 }
 .news_desc {
   height: 36px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   font-size: 12px;
   line-height: 18px;
   color: #777;
@@ -505,7 +508,7 @@
     text-transform: capitalize;
     color: #333;
     .link_more {
-      font-size: 13px;
+      font-size: 11px;
       width: 80px;
       &:after {
         background-position: -12px 0;
@@ -602,6 +605,8 @@
   width: 90px;
   padding-bottom: 3px;
   color: inherit;
+  font-size: 11px;
+  text-indent: 5px;
   &:after {
     position: absolute;
     bottom: 0;
@@ -611,6 +616,7 @@
     @include icoPath;
     background-size: 384px 384px;
     background-position: 0 0;
+    opacity: 0.5;
     content: "";
   }
 }
@@ -777,16 +783,13 @@
     max-width: 80%;
   }
 }
-li:last-child {
-  margin-bottom: 0;
-}
+
 // .inner {
 //   overflow: hidden;
 //   padding: 0 0 40px 14px;
 // }
 .wrap_headline {
   margin: 0 0 20px -20px;
-
   .list_headline {
     scroll-snap-type: x mandatory;
     overflow-x: scroll;
@@ -812,10 +815,11 @@ li:last-child {
     scroll-snap-align: center;
     min-width: 85%;
     &:first-child {
-      margin-left: 20px;
+      margin-left: 40px;
     }
   }
-  .wrap_thumb {
+  .wrap_thumb,
+  .no_img {
     display: flex;
     justify-content: center;
     align-items: center;

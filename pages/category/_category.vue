@@ -26,34 +26,42 @@ import axios from 'axios'
 import { convertDate } from '@/utils'
 import { API_KEY } from '@/utils/constants'
 import { errImg } from '@/utils'
+import { mapMutations, mapGetters } from 'vuex'
+import { CATEGORY_API } from '@/utils/api'
 export default {
+  async fetch({ store, params }) {
+    let { data } = await axios.get(CATEGORY_API())
+    store.commit('news/addArticles', data.articles)
+    store.commit('setPreloader', true)
+  },
   data() {
     return {
-      articles: '',
       errImg,
-      category: this.$route.params.category,
+      // category: this.$route.params.category,
       convertDate
     }
   },
+  computed: mapGetters({
+    articles: 'news/getArticles'
+  }),
   mounted() {
-    console.log(this.category)
     this.infiniteScroll()
   },
   created() {
-    axios
-      .get(
-        `https://newsapi.org/v2/top-headlines?country=kr&category=${
-          this.category
-        }&apiKey=${API_KEY}`
-      )
-      .then(
-        response => {
-          this.articles = response.data.articles
-        },
-        error => {
-          alert(error)
-        }
-      )
+    // axios
+    //   .get(
+    //     `https://newsapi.org/v2/top-headlines?country=kr&category=${
+    //       this.category
+    //     }&apiKey=${API_KEY}`
+    //   )
+    //   .then(
+    //     response => {
+    //       this.articles = response.data.articles
+    //     },
+    //     error => {
+    //       alert(error)
+    //     }
+    //   )
   },
   methods: {},
   methods: {

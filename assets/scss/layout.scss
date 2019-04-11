@@ -1,10 +1,11 @@
 #app {
-  padding-bottom: 40px;
+  padding: 80px 0 40px;
 }
 
 #appHeader {
   position: fixed;
   width: 100%;
+  top: 0;
   padding: 15px 14px;
   background: #292929;
   z-index: 10;

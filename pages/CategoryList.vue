@@ -1,7 +1,12 @@
 <template>
   <!-- <router-link v-bind:to="{ name: 'Search' , params: { query: query } }" class="btn_search"></router-link> -->
   <ul class="list_category">
-    <li v-for="cate in CATEGORY" :key="cate.en" v-bind:id="cate.en">
+    <li
+      v-for="cate in CATEGORY"
+      :key="cate.en"
+      v-bind:id="cate.en"
+      @click="currentCategory(cate.en)"
+    >
       <nuxt-link
         v-bind:to="{ name: 'category-category' , params: { category: cate.en }}"
         class="link_item"
@@ -21,11 +26,15 @@
 <script>
 import axios from 'axios'
 import { CATEGORY } from '@/utils/constants'
+import { mapMutations } from 'vuex'
 export default {
   data() {
     return {
       CATEGORY
     }
+  },
+  methods: {
+    ...mapMutations({ currentCategory: 'news/currentCategory' })
   }
 }
 </script>

@@ -1,17 +1,33 @@
-export const state = () => ({
-  articles: []
+const state = () => ({
+  articles: [],
+  category: ''
 })
 
-export const mutations = {
-  addArticles (state, articles) {
-    state.articles = [...articles]
-  }
-}
-export const getters = {
+const getters = {
   getArticles (state) {
     return state.articles
+  },
+  getCategory (state) {
+    return state.category
   }
 }
-export const actions = {
+const mutations = {
+  addArticles (state, articles) {
+    state.articles = [...articles]
+  },
+  currentCategory (state, payload) {
+    state.category = payload
+  }
+}
+
+const actions = {
   getArticles ({ commit }, { req }) {}
+}
+
+export default {
+  namespase: true,
+  state,
+  mutations,
+  getters,
+  actions
 }
