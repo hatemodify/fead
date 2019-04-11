@@ -1,6 +1,6 @@
 <template>
   <div class="main_cont">
-    <preloader v-if="!loading"/>
+    <preloader :load="preloaderState"/>
     <div class="wrap_headline">
       <ul class="list_headline">
         <li v-for="item in headLine" :key="item.title">
@@ -46,6 +46,7 @@ import axios from 'axios'
 import { Preloader, NewsThumb } from '@/components'
 import { API_KEY, CATEGORY } from '@/utils/constants'
 import { convertDate } from '@/utils'
+import { mapMutations, mapGetters } from 'vuex'
 
 export default {
   data() {
@@ -76,12 +77,15 @@ export default {
         })
     }
   },
+  computed: mapGetters({
+    preloaderState: 'getPreloader'
+  }),
   created() {
     axios
       .get(`https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`)
       .then(response => {
         this.headLine = response.data.articles
-        this.loading = true
+        this.$store.commit('setPreloader', true)
       })
       .catch(err => {
         console.log(err)

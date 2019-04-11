@@ -11,7 +11,7 @@
         <li>
           <router-link to="/posts">포스트</router-link>
         </li>
-        <li @click="activeSearch">찾아보기</li>
+        <li @click="activeSearch">찾아보기 {{$store.getters.articles}}</li>
         <!-- <li v-if="this.$store.state.accessToken === null">
           <router-link to="/login">로그인</router-link>
         </li>
@@ -36,7 +36,9 @@ export default {
   //     ? (this.$store.state.accessToken = localStorage.accessToken)
   //     : null
   // },
-
+  created(){
+    console.log(this.$store)
+  },
   methods: {
     activeSearch: function() {
       const searchForm = document.querySelector('.search_form')

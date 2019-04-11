@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap_preloader">
+  <div class="wrap_preloader" v-if="!load">
     <div class="preloader">
       <span class="left"></span>
       <span class="right"></span>
@@ -8,13 +8,17 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 export default {
-  name: 'preLoader'
+  name: 'preloader',
+  props: {
+    load: Boolean
+  }
 }
 </script>
-<style lang="scss" scope>
+<style lang="scss" scoped>
 .wrap_preloader {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;

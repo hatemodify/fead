@@ -1,5 +1,6 @@
 <template>
   <article class="headline_cont">
+    <preloader :load="preloaderState"/>
     <ul class="list_headline">
       <li v-for="item in headLine" :key="item.title">
         <button class="btn_scrap" :class="{'active': isActive}" @click="thisScrap(item)"></button>
@@ -23,29 +24,43 @@
 import axios from 'axios'
 import { Preloader, NewsThumb } from '@/components'
 import { convertDate } from '@/utils'
+import { API_KEY } from '@/utils/constants'
+import { mapMutations, mapGetters } from 'vuex'
 export default {
-  components: { NewsThumb },
+  async fetch({ store, params }) {
+    let { data } = await axios.get(
+      `https://newsapi.org/v2/top-headlines?country=kr&pageSize=40&apiKey=${API_KEY}`
+    )
+    store.commit('news/addArticles', data.articles)
+    store.commit('setPreloader', true)
+  },
   data() {
     return {
-      headLine: '',
+      // headLine: '',
       isActive: false,
       loading: false,
       convertDate
     }
   },
+  components: { NewsThumb, Preloader },
+  computed: mapGetters({
+    headLine: 'news/getArticles',
+    preloaderState: 'getPreloader'
+  }),
   methods: {
-    async thisScrap(val) {
-      const userId = localStorage.accessToken
-      if (userId !== 'null') {
-        await PostsService.addScrap({
-          scrap: val,
-          userId
-        })
-      } else {
-        alert('로그인 해주세요')
-        this.$router.push({ name: 'Login' })
-      }
-    },
+    // async thisScrap(val) {
+    //   const userId = localStorage.accessToken
+    //   if (userId !== 'null') {
+    //     await PostsService.addScrap({
+    //       scrap: val,
+    //       userId
+    //     })
+    //   } else {
+    //     alert('로그인 해주세요')
+    //     this.$router.push({ name: 'Login' })
+    //   }
+    // },
+
     infiniteScroll() {
       window.addEventListener('scroll', () => {
         const windowHeight = window.outerHeight
@@ -60,7 +75,7 @@ export default {
     getHeadline() {
       axios
         .get(
-          'https://newsapi.org/v2/top-headlines?country=kr&pageSize=40&apiKey=602cd3b6051a451d8e99935b8e7cad01'
+          `https://newsapi.org/v2/top-headlines?country=kr&pageSize=40&apiKey=${API_KEY}`
         )
         .then(
           response => {
@@ -73,19 +88,19 @@ export default {
     }
   },
   created() {
-    axios
-      .get(
-        'https://newsapi.org/v2/top-headlines?country=kr&apiKey=602cd3b6051a451d8e99935b8e7cad01'
-      )
-      .then(
-        response => {
-          this.headLine = response.data.articles
-          this.loading = true
-        },
-        error => {
-          alert(error)
-        }
-      )
+    // axios
+    //   .get(
+    //     'https://newsapi.org/v2/top-headlines?country=kr&apiKey=602cd3b6051a451d8e99935b8e7cad01'
+    //   )
+    //   .then(
+    //     response => {
+    //       this.headLine = response.data.articles
+    //       this.loading = true
+    //     },
+    //     error => {
+    //       alert(error)
+    //     }
+    //   )
   },
   mounted() {
     this.infiniteScroll()
