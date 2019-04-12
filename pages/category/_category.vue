@@ -27,23 +27,19 @@ import { convertDate } from '@/utils'
 import { API_KEY } from '@/utils/constants'
 import { errImg } from '@/utils'
 import { mapMutations, mapGetters } from 'vuex'
-import { CATEGORY_API } from '@/utils/api'
+
 export default {
-  async fetch({ store, params }) {
-    let { data } = await axios.get(CATEGORY_API())
-    store.commit('news/addArticles', data.articles)
-    store.commit('setPreloader', true)
-  },
   data() {
     return {
       errImg,
-      // category: this.$route.params.category,
+      category: this.$route.params.category,
       convertDate
     }
   },
   computed: mapGetters({
     articles: 'news/getArticles'
   }),
+
   mounted() {
     this.infiniteScroll()
   },
@@ -62,6 +58,7 @@ export default {
     //       alert(error)
     //     }
     //   )
+    this.$store.dispatch('news/getArticles', this.category)
   },
   methods: {},
   methods: {

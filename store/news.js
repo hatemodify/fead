@@ -1,3 +1,5 @@
+import axios from 'axios'
+import { CATEGORY_API } from '@/utils/api'
 const state = () => ({
   articles: [],
   category: ''
@@ -6,22 +8,19 @@ const state = () => ({
 const getters = {
   getArticles (state) {
     return state.articles
-  },
-  getCategory (state) {
-    return state.category
   }
 }
 const mutations = {
   addArticles (state, articles) {
     state.articles = [...articles]
-  },
-  currentCategory (state, payload) {
-    state.category = payload
   }
 }
 
 const actions = {
-  getArticles ({ commit }, { req }) {}
+  async getArticles ({ commit }, payload) {
+    let { data } = await axios.get(CATEGORY_API(payload))
+    commit('addArticles', data.articles)
+  }
 }
 
 export default {
