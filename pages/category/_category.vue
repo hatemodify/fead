@@ -1,6 +1,6 @@
 <template>
   <div class="category_cont">
-    <h2 class="tit_page">{{this.category}}</h2>
+    <h2 class="tit_page">{{category}}</h2>
     <ul class="list_news">
       <li v-for="item in articles" :key="item.id">
         <a :href="item.url">
@@ -25,19 +25,25 @@
 import axios from 'axios'
 import { convertDate } from '@/utils'
 import { API_KEY } from '@/utils/constants'
+import { CATEGORY_API } from '@/utils/api'
 import { errImg } from '@/utils'
 import { mapMutations, mapGetters } from 'vuex'
 
 export default {
+  async fetch({ store, params }) {
+    let { data } = await axios.get(CATEGORY_API(store.getters.category))
+    store.commit('news/addArticles', data.articles)
+    // store.commit('setPreloader', true)
+  },
   data() {
     return {
       errImg,
-      category: this.$route.params.category,
       convertDate
     }
   },
   computed: mapGetters({
-    articles: 'news/getArticles'
+    articles: 'news/getArticles',
+    category: 'news/getCategory'
   }),
 
   mounted() {
