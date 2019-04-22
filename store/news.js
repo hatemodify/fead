@@ -3,13 +3,14 @@ import { CATEGORY_API, HEADLINE_API } from '@/utils/api'
 const state = () => ({
   headline: [],
   articles: [],
-  business: [],
-  entertainment: [],
-  sports: [],
-  science: [],
-  health: [],
-  general: [],
-  category: ''
+  categoryArticles: {
+    business: [],
+    entertainment: [],
+    sports: [],
+    science: [],
+    health: [],
+    general: []
+  }
 })
 
 const getters = {
@@ -19,16 +20,16 @@ const getters = {
   getHeadlines (state) {
     return state.headline
   },
-  getCategory (state) {
-    return state.category
+  getCategoryArticles (state) {
+    return state.categoryArticles
   }
 }
 const mutations = {
-  addArticles (state, articles, type) {
+  addArticles (state, articles) {
     state.articles = [...articles]
   },
-  addCategory (state, articles, option) {
-    state[option] = [...articles]
+  addCategory (state, { articles, category }) {
+    state.categoryArticles[category] = [...articles]
   },
   addHeadlines (state, articles) {
     state.headline = [...articles]
@@ -44,11 +45,11 @@ const mutations = {
 const actions = {
   async getArticles ({ commit }, payload) {
     let { data } = await axios.get(CATEGORY_API(payload))
-    console.log(data.articles)
+    let articles = data.articles
+    let category = payload
     // commit('removeArticles')
     // commit('addArticles', data.articles)
-    commit('addCategory', data.articles, state)
-    console.log(state)
+    commit('addCategory', { articles, category })
   },
   async headlineNews ({ commit }) {
     let { data } = await axios.get(HEADLINE_API)

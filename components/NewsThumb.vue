@@ -1,6 +1,6 @@
 <template>
   <picture class="wrap_thumb">
-    <img :src="imgSource" @error="errImg" class="thumb_img" alt>
+    <img :src="imgSource || errImg" @error="errImg" class="thumb_img" alt>
   </picture>
 </template>
 <script>

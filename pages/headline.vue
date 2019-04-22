@@ -4,7 +4,7 @@
     <ul class="list_headline">
       <li v-for="(item, idx) in headLines" :key="idx">
         <button class="btn_scrap" :class="{'active': isActive}" @click="thisScrap(item)"></button>
-        <a :href="item.url" class="link_item">
+        <a :href="item.url" class="link_item" target="_blank">
           <news-thumb :imgSource="item.urlToImage"/>
         </a>
         <div class="wrap_info">
