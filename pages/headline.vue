@@ -1,8 +1,8 @@
 <template>
   <article class="headline_cont">
-    <preloader :load="preloaderState"/>
+    <preloader :load="loading"/>
     <ul class="list_headline">
-      <li v-for="item in headLine" :key="item.title">
+      <li v-for="(item, idx) in headLines" :key="idx">
         <button class="btn_scrap" :class="{'active': isActive}" @click="thisScrap(item)"></button>
         <a :href="item.url" class="link_item">
           <news-thumb :imgSource="item.urlToImage"/>
@@ -27,16 +27,15 @@ import { convertDate } from '@/utils'
 import { API_KEY } from '@/utils/constants'
 import { mapMutations, mapGetters } from 'vuex'
 export default {
-  async fetch({ store, params }) {
-    let { data } = await axios.get(
-      `https://newsapi.org/v2/top-headlines?country=kr&pageSize=40&apiKey=${API_KEY}`
-    )
-    store.commit('news/addArticles', data.articles)
-    store.commit('setPreloader', true)
-  },
+  // async fetch({ store, params }) {
+  //   let { data } = await axios.get(
+  //     `https://newsapi.org/v2/top-headlines?country=kr&pageSize=40&apiKey=${API_KEY}`
+  //   )
+  //   store.commit('news/addArticles', data.articles)
+  //   store.commit('setPreloader', true)
+  // },
   data() {
     return {
-      // headLine: '',
       isActive: false,
       loading: false,
       convertDate
@@ -44,8 +43,7 @@ export default {
   },
   components: { NewsThumb, Preloader },
   computed: mapGetters({
-    headLine: 'news/getArticles',
-    preloaderState: 'getPreloader'
+    headLines: 'news/getHeadlines'
   }),
   methods: {
     // async thisScrap(val) {
@@ -71,38 +69,11 @@ export default {
           this.getHeadline()
         }
       })
-    },
-    getHeadline() {
-      axios
-        .get(
-          `https://newsapi.org/v2/top-headlines?country=kr&pageSize=40&apiKey=${API_KEY}`
-        )
-        .then(
-          response => {
-            this.headLine = response.data.articles
-          },
-          error => {
-            alert(error)
-          }
-        )
     }
   },
   created() {
-    // axios
-    //   .get(
-    //     'https://newsapi.org/v2/top-headlines?country=kr&apiKey=602cd3b6051a451d8e99935b8e7cad01'
-    //   )
-    //   .then(
-    //     response => {
-    //       this.headLine = response.data.articles
-    //       this.loading = true
-    //     },
-    //     error => {
-    //       alert(error)
-    //     }
-    //   )
-  },
-  mounted() {
+    this.$store.dispatch('news/headlineNews')
+    this.headLines ? (this.loading = true) : (this.loading = false)
     this.infiniteScroll()
   }
 }

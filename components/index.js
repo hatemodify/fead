@@ -1,5 +1,7 @@
-import preloaderComp from './Preloader.vue'
-import thumbComp from './NewsThumb.vue'
+import PreloaderComp from './Preloader.vue'
+import ThumbComp from './NewsThumb.vue'
+import PageTitleComp from './PageTitle.vue'
 
-export const Preloader = preloaderComp
-export const NewsThumb = thumbComp
+export const Preloader = PreloaderComp
+export const NewsThumb = ThumbComp
+export const PageTit = PageTitleComp

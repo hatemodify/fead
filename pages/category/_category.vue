@@ -1,6 +1,6 @@
 <template>
   <div class="category_cont">
-    <h2 class="tit_page">{{category}}</h2>
+    <page-tit :title="category"/>
     <ul class="list_news">
       <li v-for="item in articles" :key="item.id">
         <a :href="item.url">
@@ -23,6 +23,7 @@
 
 <script>
 import axios from 'axios'
+import { PageTit } from '@/components'
 import { convertDate } from '@/utils'
 import { API_KEY } from '@/utils/constants'
 import { CATEGORY_API } from '@/utils/api'
@@ -38,18 +39,19 @@ export default {
   data() {
     return {
       errImg,
-      convertDate
+      convertDate,
+      category: this.$route.params.category
     }
   },
+  components: {
+    PageTit
+  },
   computed: mapGetters({
-    articles: 'news/getArticles',
-    category: 'news/getCategory'
+    articles: 'news/getArticles'
   }),
 
-  mounted() {
-    this.infiniteScroll()
-  },
   created() {
+    console.log(this.$route.params.category)
     // axios
     //   .get(
     //     `https://newsapi.org/v2/top-headlines?country=kr&category=${
@@ -66,7 +68,7 @@ export default {
     //   )
     this.$store.dispatch('news/getArticles', this.category)
   },
-  methods: {},
+
   methods: {
     infiniteScroll() {
       window.addEventListener('scroll', () => {

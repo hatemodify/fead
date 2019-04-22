@@ -1,9 +1,9 @@
 <template>
   <div class="main_cont">
-    <preloader :load="preloaderState"/>
+    <preloader :load="loading"/>
     <div class="wrap_headline">
       <ul class="list_headline">
-        <li v-for="item in headLine" :key="item.title">
+        <li v-for="item in headLines.slice(0, 10)" :key="item.title">
           <button class="btn_scrap"></button>
           <a :href="item.url" class="link_item" target="_blank">
             <news-thumb :imgSource="item.urlToImage"/>
@@ -19,7 +19,6 @@
         </li>
       </ul>
     </div>
-
     <div class="wrap_category" v-for="(cate,key) in newsList" :key="key">
       <h3 class="tit_cate">
         {{key}}
@@ -51,9 +50,8 @@ import { mapMutations, mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      loading: false,
-      headLine: '',
       isActive: false,
+      loading: false,
       convertDate,
       newsList: {
         business: [],
@@ -66,6 +64,9 @@ export default {
     }
   },
   components: { Preloader, NewsThumb },
+  computed: mapGetters({
+    headLines: 'news/getHeadlines'
+  }),
   methods: {
     getCategoryNews(category) {
       axios
@@ -77,21 +78,10 @@ export default {
         })
     }
   },
-  computed: mapGetters({
-    preloaderState: 'getPreloader'
-  }),
   created() {
-    axios
-      .get(`https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`)
-      .then(response => {
-        this.headLine = response.data.articles
-        this.$store.commit('setPreloader', true)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-    CATEGORY.forEach(item => {
-      this.getCategoryNews(item.en)
+    this.$store.dispatch('news/headlineNews').then(() => (this.loading = true))
+    CATEGORY.forEach(element => {
+      this.$store.dispatch('news/getArticles', element.en)
     })
   }
 
