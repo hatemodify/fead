@@ -66,8 +66,17 @@ export default {
         const appHeight = app.clientHeight
         const scrollTop = window.scrollY
         if (scrollTop > appHeight - windowHeight) {
-          this.getHeadline()
         }
+      })
+    },
+    animateTit() {
+      window.addEventListener('scroll', () => {
+        const tit = this.$refs.tit
+        const titOffest = tit.offsetTop + 40
+        const scrollTop = window.scrollY
+        scrollTop > titOffest
+          ? tit.classList.add('sticky')
+          : tit.classList.remove('sticky')
       })
     }
   },
@@ -75,6 +84,7 @@ export default {
     this.$store.dispatch('news/headlineNews')
     this.headLines ? (this.loading = true) : (this.loading = false)
     this.infiniteScroll()
+    this.animateTit()
   }
 }
 </script>

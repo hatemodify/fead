@@ -10,8 +10,24 @@ export default {
   data() {
     return {}
   },
-  created() {},
-  methods: {}
+  created() {
+    this.animateTit()
+  },
+  methods: {
+    animateTit() {
+      const tit = this.$refs.tit
+      const scroll = (() => {
+        return () => {
+          const titOffest = tit.offsetTop + 40
+          const scrollTop = window.scrollY
+          scrollTop > 80
+            ? tit.classList.add('sticky')
+            : tit.classList.remove('sticky')
+        }
+      })()
+      window.addEventListener('scroll', scroll)
+    }
+  }
 }
 </script>
 <style lang="scss">
@@ -22,7 +38,7 @@ export default {
   left: 14px;
   text-transform: capitalize;
   font-weight: bold;
-  transition: cubic-bezier(0.23, 1, 0.32, 1) 1s;
+  transition: 1s color;
   z-index: 30;
   &.sticky {
     position: fixed;
