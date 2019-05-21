@@ -1,8 +1,10 @@
 import axios from 'axios'
 import { CATEGORY_API, HEADLINE_API } from '@/utils/api'
+import { SEARCH_API } from '../utils/api'
 const state = () => ({
   headline: [],
   articles: [],
+  searchResult: [],
   categoryArticles: {
     business: [],
     entertainment: [],
@@ -22,6 +24,9 @@ const getters = {
   },
   getCategoryArticles (state) {
     return state.categoryArticles
+  },
+  getSearchResult (state) {
+    return state.searchResult
   }
 }
 const mutations = {
@@ -33,6 +38,9 @@ const mutations = {
   },
   addHeadlines (state, articles) {
     state.headline = [...articles]
+  },
+  addSearchResult (state, searchResult) {
+    state.searchResult = searchResult
   },
   removeArticles (state) {
     state.articles = []
@@ -54,6 +62,12 @@ const actions = {
   async headlineNews ({ commit }) {
     let { data } = await axios.get(HEADLINE_API)
     commit('addHeadlines', data.articles)
+  },
+  async getSearchResult ({ commit }, payload) {
+    let { data } = await axios.get(SEARCH_API(payload))
+    console.log(data.articles)
+    let articles = data.articles
+    commit('addSearchResult', { articles })
   }
 }
 

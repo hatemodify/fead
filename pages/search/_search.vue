@@ -1,8 +1,23 @@
-<template></template>
+<template>
+  <div>
+    <news-list :articles="searchResult.articles"></news-list>
+  </div>
+</template>
 <script>
+import { mapGetters } from 'vuex'
+import { NewsList } from '@/components'
 export default {
+  components: {
+    NewsList
+  },
+  computed: mapGetters({
+    query: 'getSearchQuery',
+    searchResult: 'news/getSearchResult'
+  }),
   created() {
-    console.log(this.$store.getters.getSearchQuery)
+    this.$store
+      .dispatch('news/getSearchResult', this.query)
+      .then(() => (this.loading = true))
   }
 }
 </script>

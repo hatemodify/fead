@@ -2,7 +2,7 @@
   <!-- <div class="search_form" v-bind:class="{on:searchState}"> -->
   <div class="search_form">
     <input type="text" class="inp_search" v-model="searchQuery" placeholder="Search...">
-    <button class="btn_search" @click="getSearchQuery"></button>
+    <button class="btn_search" @click="getSearchQuery" @keyup.enter="getSearchQuery"></button>
   </div>
 </template>
 

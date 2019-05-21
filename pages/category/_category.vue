@@ -32,11 +32,6 @@ import { errImg } from '@/utils'
 import { mapMutations, mapGetters } from 'vuex'
 
 export default {
-  // async fetch({ store, params }) {
-  //   let { data } = await axios.get(CATEGORY_API(store.getters.category))
-  //   store.commit('news/addArticles', data.articles)
-  //   // store.commit('setPreloader', true)
-  // },
   data() {
     return {
       loading: false,
@@ -51,20 +46,6 @@ export default {
   }),
 
   created() {
-    // axios
-    //   .get(
-    //     `https://newsapi.org/v2/top-headlines?country=kr&category=${
-    //       this.category
-    //     }&apiKey=${API_KEY}`
-    //   )
-    //   .then(
-    //     response => {
-    //       this.articles = response.data.articles
-    //     },
-    //     error => {
-    //       alert(error)
-    //     }
-    //   )
     this.$store.dispatch('news/getArticles', this.category).then(() => {
       this.loading = true
     })
