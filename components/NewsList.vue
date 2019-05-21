@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { NewsThumb } from '@/components'
+import  NewsThumb  from '@/components/NewsThumb'
 import { convertDate } from '@/utils'
 export default {
   name: 'newslist',

@@ -1,14 +1,17 @@
 export const state = () => ({
   preloader: false,
-  searchQuery: ''
+  searchState:{
+    query:'',
+    isOpen:false
+  }
 })
 
 export const mutations = {
   setPreloader (state, payload) {
     state.preloader = payload
   },
-  setSearchQuery (state, payload) {
-    state.searchQuery = payload
+  setSearchState (state, payload) {
+    state.searchState = {payload}
   }
 }
 

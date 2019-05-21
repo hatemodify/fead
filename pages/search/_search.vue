@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <article class="search_cont">
+    <h3 class="tit_search">'{{query}}' 검색결과</h3>
     <news-list :articles="searchResult.articles"></news-list>
-  </div>
+  </article>
 </template>
 <script>
 import { mapGetters } from 'vuex'

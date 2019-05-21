@@ -1,5 +1,5 @@
 <template>
-  <aside class="side_menu">
+  <div class="side_menu">
     <div class="inner">
       <div class="wrap_profile" v-if="chkLogin !== 'null'">
         <picture class="wrap_thumb">
@@ -28,7 +28,7 @@
       </nav>
       <button class="btn_logout" v-if="chkLogin !== 'null'">로그아웃</button>
     </div>
-  </aside>
+  </div>
 </template>
 <script>
 export default {
@@ -44,6 +44,5 @@ export default {
       user: ''
     }
   },
-  methods: {}
 }
 </script>

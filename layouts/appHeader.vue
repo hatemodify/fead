@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     activeMenu(e) {
-      const appHeader = document.getElementById('appHeader')
+      const appHeader = this.$refs.appHeader
       const nav = document.querySelector('.side_menu')
       this.isActive = !this.isActive
       this.isActive
@@ -49,15 +49,9 @@ export default {
         if (e.target == this) {
           appHeader.classList.remove('active')
           this.isActive = !this.isActive
-          console.log(e.target)
         }
       })
     },
-    searchEvt() {
-      !this.searchQuery
-        ? alert('검색어를 입력해 주세요')
-        : this.$router.push(`/search/${this.searchQuery}`)
-    }
   },
   // created() {
   //   if (this.chkLogin !== 'null') {
@@ -75,6 +69,6 @@ export default {
   //     )
   //   }
   // },
-  mounted() {}
+
 }
 </script>
