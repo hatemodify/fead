@@ -69,9 +69,6 @@ export default {
       this.loading = true
     })
   },
-  mounted() {
-    this.animateTit()
-  },
 
   methods: {
     infiniteScroll() {
@@ -96,17 +93,6 @@ export default {
               }
             )
         }
-      })
-    },
-    animateTit() {
-      window.addEventListener('scroll', () => {
-        const windowHeight = window.outerHeight
-        const tit = document.querySelector('.tit_page')
-        const titOffest = tit.offsetTop
-        const scrollTop = window.scrollY
-        scrollTop > titOffest
-          ? tit.classList.add('sticky')
-          : tit.classList.remove('sticky')
       })
     }
   }

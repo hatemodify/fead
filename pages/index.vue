@@ -60,7 +60,6 @@ export default {
     headLines: 'news/getHeadlines',
     categoryArticles: 'news/getCategoryArticles'
   }),
-
   created() {
     CATEGORY.forEach(element => {
       this.$store.dispatch('news/getArticles', element.en)

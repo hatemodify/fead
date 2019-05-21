@@ -11,17 +11,13 @@
       </button>
     </div>
     <side-menu :chkLogin="chkLogin"/>
-    <form class="search_form" v-bind:class="{on:searchState}">
-      <legend>검색폼</legend>
-      <input type="text" class="inp_search" v-model="searchQuery" placeholder="Search...">
-      <button class="btn_search" @click.prevent="searchEvt"></button>
-    </form>
+    <search-form/>
   </header>
 </template>
 
 <script>
 import axios from 'axios'
-import SideMenu from './SideMenu'
+import { SideMenu, SearchForm } from '@/components'
 export default {
   data() {
     return {
@@ -34,7 +30,7 @@ export default {
       user: ''
     }
   },
-  components: { SideMenu },
+  components: { SideMenu, SearchForm },
   watch: {
     reSearch() {
       this.searchQuery = '검색어를 입력하세요'

@@ -83,8 +83,8 @@ export default {
   created() {
     this.$store.dispatch('news/headlineNews')
     this.headLines ? (this.loading = true) : (this.loading = false)
-    this.infiniteScroll()
-    this.animateTit()
+    // this.infiniteScroll()
+    // this.animateTit()
   }
 }
 </script>

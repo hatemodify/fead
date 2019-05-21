@@ -35,8 +35,15 @@ export default {
   props: ['chkLogin'],
   data() {
     return {
-      defaultProfile: require(`@/assets/images/thumb_user.png`)
+      defaultProfile: require(`@/assets/images/thumb_user.png`),
+      isActive: false,
+      searchQuery: '',
+      chkLogin: localStorage.accessToken,
+      profileImg: '',
+      profileImgPath: '',
+      user: ''
     }
-  }
+  },
+  methods: {}
 }
 </script>

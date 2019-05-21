@@ -7,25 +7,22 @@ export default {
   props: {
     title: String
   },
-  data() {
-    return {}
+
+  mounted() {
+    window.addEventListener('scroll', this.animateTit)
   },
-  created() {
-    this.animateTit()
+  destroyed() {
+    window.removeEventListener('scroll', this.animateTit)
   },
   methods: {
     animateTit() {
+      const windowHeight = window.outerHeight
       const tit = this.$refs.tit
-      const scroll = (() => {
-        return () => {
-          const titOffest = tit.offsetTop + 40
-          const scrollTop = window.scrollY
-          scrollTop > 80
-            ? tit.classList.add('sticky')
-            : tit.classList.remove('sticky')
-        }
-      })()
-      window.addEventListener('scroll', scroll)
+      const titOffest = tit.offsetTop
+      const scrollTop = window.scrollY
+      scrollTop > titOffest
+        ? tit.classList.add('sticky')
+        : tit.classList.remove('sticky')
     }
   }
 }
