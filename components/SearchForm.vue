@@ -3,9 +3,9 @@
     <input
       type="text"
       class="inp_search"
+      placeholder="Search..."
       v-model="searchQuery"
       @keyup.enter="getSearchQuery"
-      placeholder="Search..."
     >
     <button class="btn_search" @click="getSearchQuery"></button>
   </div>
@@ -19,6 +19,7 @@ export default {
       searchQuery: ''
     }
   },
+
   methods: {
     getSearchQuery() {
       const searchQuery = this.searchQuery
