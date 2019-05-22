@@ -1,9 +1,7 @@
 export const state = () => ({
   preloader: false,
-  searchState:{
-    query:'',
-    isOpen:false
-  }
+  searchState: false,
+  searchQuery: ''
 })
 
 export const mutations = {
@@ -11,7 +9,8 @@ export const mutations = {
     state.preloader = payload
   },
   setSearchState (state, payload) {
-    state.searchState = {payload}
+    const key = Object.keys(payload)
+    state[key] = payload[key]
   }
 }
 
@@ -21,5 +20,8 @@ export const getters = {
   },
   getSearchQuery (state) {
     return state.searchQuery
+  },
+  getSearchState (state) {
+    return state.searchState
   }
 }

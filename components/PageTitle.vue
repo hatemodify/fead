@@ -1,5 +1,5 @@
 <template>
-  <h2 class="tit_page" ref="tit">{{title}}</h2>
+  <h2 class="tit_page" ref="tit">{{title}}<slot></slot></h2>
 </template>
 
 <script>
@@ -27,7 +27,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .tit_page {
   font-size: 18px;
   position: absolute;

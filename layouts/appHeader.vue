@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { SideMenu, SearchForm } from '@/components'
 export default {
   data() {
@@ -51,8 +50,8 @@ export default {
           this.isActive = !this.isActive
         }
       })
-    },
-  },
+    }
+  }
   // created() {
   //   if (this.chkLogin !== 'null') {
   //     axios.get(`${process.env.ROOT_API}/mypage`).then(
@@ -69,6 +68,5 @@ export default {
   //     )
   //   }
   // },
-
 }
 </script>

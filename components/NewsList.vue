@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import  NewsThumb  from '@/components/NewsThumb'
+import NewsThumb from '@/components/NewsThumb.vue'
 import { convertDate } from '@/utils'
 export default {
   name: 'newslist',

@@ -7,7 +7,7 @@ import NewsListComp from './NewsList.vue'
 
 export const Preloader = PreloaderComp
 export const NewsThumb = ThumbComp
-export const PageTit = PageTitleComp
+export const PageTitle = PageTitleComp
 export const SearchForm = SearchFormComp
 export const SideMenu = SideMenuComp
 export const NewsList = NewsListComp

@@ -8,10 +8,10 @@
         <li>
           <router-link to="/categorylist">카테고리</router-link>
         </li>
+        <li @click="searchOpen({searchState: open = !open})">검색</li>
         <li>
           <router-link to="/posts">포스트</router-link>
         </li>
-        <li @click="activeSearch">찾아보기 {{$store.getters.articles}}</li>
         <!-- <li v-if="this.$store.state.accessToken === null">
           <router-link to="/login">로그인</router-link>
         </li>
@@ -23,30 +23,17 @@
   </footer>
 </template>
 <script>
+import { mapMutation, mapMutations } from 'vuex'
 export default {
-  // data() {
-  //   return {
-  //     searchState: false,
-  //     chkLogin: localStorage.accessToken,
-  //     loading: false
-  //   }
-  // },
-  // mounted() {
-  //   localStorage.accessToken !== 'null'
-  //     ? (this.$store.state.accessToken = localStorage.accessToken)
-  //     : null
-  // },
-  created(){
-    console.log(this.$store)
+  data() {
+    return {
+      open: false,
+      chkLogin: localStorage.accessToken,
+      loading: false
+    }
   },
   methods: {
-    activeSearch: function() {
-      const searchForm = document.querySelector('.search_form')
-      this.searchState = !this.searchState
-      this.searchState
-        ? searchForm.classList.add('on')
-        : searchForm.classList.remove('on')
-    }
+    ...mapMutations({ searchOpen: 'setSearchState' })
   }
 }
 </script>
