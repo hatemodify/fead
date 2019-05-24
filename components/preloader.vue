@@ -10,7 +10,7 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  name: 'preloader',
+  name: 'Preloader',
   props: {
     load: Boolean
   }
