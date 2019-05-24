@@ -2,7 +2,7 @@
   <article class="search_cont">
     <preloader :load="loading"/>
     <page-title :title="query">
-      <slot>검색결과</slot>
+      <slot>-검색결과</slot>
     </page-title>
     <news-list :articles="searchResult.articles"></news-list>
   </article>
