@@ -1,5 +1,5 @@
 <template>
-  <article class="headline_cont">
+  <article class="headline_cont" ref="cont">
     <preloader :load="loading"/>
     <ul class="list_headline">
       <li v-for="(item, idx) in headLines" :key="idx">
@@ -25,7 +25,7 @@ import axios from 'axios'
 import { Preloader, NewsThumb } from '@/components'
 import { convertDate } from '@/utils'
 import { API_KEY } from '@/utils/constants'
-import { mapMutations, mapGetters } from 'vuex'
+import { mapMutations, mapGetters, mapActions } from 'vuex'
 export default {
   // async fetch({ store, params }) {
   //   let { data } = await axios.get(
@@ -38,6 +38,7 @@ export default {
     return {
       isActive: false,
       loading: false,
+      page: 1,
       convertDate
     }
   },
@@ -61,11 +62,16 @@ export default {
 
     infiniteScroll() {
       window.addEventListener('scroll', () => {
-        const windowHeight = window.outerHeight
         const app = document.getElementById('app')
-        const appHeight = app.clientHeight
+        // const windowHeight = window.outerHeight
+        // const appHeight = app.clientHeight
         const scrollTop = window.scrollY
-        if (scrollTop > appHeight - windowHeight) {
+        const viewPort = document.documentElement.clientHeight
+        const pageHeight = document.documentElement.scrollHeight
+        const pageBottom = viewPort + scrollY >= pageHeight
+
+        if (pageBottom) {
+          this.getheadline(this.page + 1)
         }
       })
     },
@@ -78,12 +84,15 @@ export default {
           ? tit.classList.add('sticky')
           : tit.classList.remove('sticky')
       })
-    }
+    },
+    ...mapActions({
+      getheadline: 'news/headlineNews'
+    })
   },
   created() {
     this.$store.dispatch('news/headlineNews')
     this.headLines ? (this.loading = true) : (this.loading = false)
-    // this.infiniteScroll()
+    this.infiniteScroll()
     // this.animateTit()
   }
 }

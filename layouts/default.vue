@@ -7,11 +7,11 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import appHeader from './appHeader'
-import appFooter from './appFooter'
+import AppHeader from './AppHeader'
+import AppFooter from './AppFooter'
 
 export default {
-  components: { appHeader, appFooter },
+  components: { AppHeader, AppFooter },
   computed: mapGetters({
     searchState: 'getSearchState'
   })

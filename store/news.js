@@ -37,7 +37,7 @@ const mutations = {
     state.categoryArticles[category] = [...articles]
   },
   addHeadlines (state, articles) {
-    state.headline = [...articles]
+    state.headline = state.headline.concat(articles)
   },
   addSearchResult (state, searchResult) {
     state.searchResult = searchResult
@@ -55,17 +55,14 @@ const actions = {
     let { data } = await axios.get(CATEGORY_API(payload))
     let articles = data.articles
     let category = payload
-    // commit('removeArticles')
-    // commit('addArticles', data.articles)
     commit('addCategory', { articles, category })
   },
-  async headlineNews ({ commit }) {
-    let { data } = await axios.get(HEADLINE_API)
+  async headlineNews ({ commit }, payload) {
+    let { data } = await axios.get(HEADLINE_API(payload))
     commit('addHeadlines', data.articles)
   },
   async getSearchResult ({ commit }, payload) {
     let { data } = await axios.get(SEARCH_API(payload))
-    console.log(data.articles)
     let articles = data.articles
     commit('addSearchResult', { articles })
   }
