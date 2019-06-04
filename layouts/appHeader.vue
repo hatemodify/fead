@@ -10,26 +10,24 @@
         <span class="ico_fead ico_menu"></span>
       </button>
     </div>
-    <side-menu :chkLogin="chkLogin"/>
+    <side-menu/>
+
     <search-form/>
   </header>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import { SideMenu, SearchForm } from '@/components'
 export default {
   data() {
     return {
       isActive: false,
-      searchQuery: '',
-      searchState: false,
-      chkLogin: localStorage.accessToken,
-      profileImg: '',
-      profileImgPath: '',
-      user: ''
+      searchState: false
     }
   },
   components: { SideMenu, SearchForm },
+
   watch: {
     reSearch() {
       this.searchQuery = '검색어를 입력하세요'
@@ -52,6 +50,7 @@ export default {
       })
     }
   }
+
   // created() {
   //   if (this.chkLogin !== 'null') {
   //     axios.get(`${process.env.ROOT_API}/mypage`).then(

@@ -1,5 +1,10 @@
 export const API_KEY = '602cd3b6051a451d8e99935b8e7cad01'
 
+export const CLIENT_ID =
+  '629478743345-pto5adbsdrkcvtlbvehjq06qt2gvfln7.apps.googleusercontent.com'
+
+export const DEFAULT_PROFILE = require(`@/assets/images/thumb_user.png`)
+
 export const CATEGORY = [
   {
     en: 'business',

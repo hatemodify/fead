@@ -62,9 +62,6 @@ export default {
 
     infiniteScroll() {
       window.addEventListener('scroll', () => {
-        const app = document.getElementById('app')
-        // const windowHeight = window.outerHeight
-        // const appHeight = app.clientHeight
         const scrollTop = window.scrollY
         const viewPort = document.documentElement.clientHeight
         const pageHeight = document.documentElement.scrollHeight
