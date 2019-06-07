@@ -1,4 +1,4 @@
-import PreloaderComp from './Preloader.vue'
+import PreloaderComp from './_Preloader.vue'
 import ThumbComp from './NewsThumb.vue'
 import PageTitleComp from './PageTitle.vue'
 import SearchFormComp from './SearchForm.vue'
