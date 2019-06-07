@@ -7,8 +7,8 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import AppHeader from './AppHeader'
-import AppFooter from './AppFooter'
+import AppHeader from './_AppHeader'
+import AppFooter from './_AppFooter'
 
 export default {
   components: { AppHeader, AppFooter },
