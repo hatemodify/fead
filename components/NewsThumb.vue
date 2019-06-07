@@ -1,10 +1,10 @@
 <template>
   <picture class="wrap_thumb">
-    <img :src="imgSource || errImg" class="thumb_img" alt @error="errImg">
+    <img :src="replaceImgSource(imgSource) || errImg" class="thumb_img" alt @error="errImg">
   </picture>
 </template>
 <script>
-import { errImg } from '@/utils'
+import { errImg, replaceImgSource } from '@/utils'
 export default {
   name: 'NewsThumb',
   props: {
@@ -12,7 +12,8 @@ export default {
   },
   data() {
     return {
-      errImg
+      errImg,
+      replaceImgSource
     }
   }
 }
