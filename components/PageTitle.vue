@@ -1,5 +1,8 @@
 <template>
-  <h2 class="tit_page" ref="tit">{{title}}<slot></slot></h2>
+  <h2 class="tit_page" ref="tit">
+    {{title}}
+    <slot></slot>
+  </h2>
 </template>
 
 <script>
@@ -36,7 +39,6 @@ export default {
   text-transform: capitalize;
   font-weight: bold;
   transition: 1s color;
-  z-index: 30;
   &.sticky {
     position: fixed;
     transform: translateX(-50%);
@@ -44,6 +46,7 @@ export default {
     top: 0;
     color: #fff;
     line-height: 60px;
+    z-index: 30;
   }
 }
 </style>

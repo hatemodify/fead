@@ -52,18 +52,18 @@ const mutations = {
 
 const actions = {
   async getArticles ({ commit }, payload) {
-    let { data } = await axios.get(CATEGORY_API(payload))
-    let articles = data.articles
-    let category = payload
+    const { data } = await axios.get(CATEGORY_API(payload))
+    const articles = data.articles
+    const category = payload
     commit('addCategory', { articles, category })
   },
   async headlineNews ({ commit }, payload) {
-    let { data } = await axios.get(HEADLINE_API(payload))
+    const { data } = await axios.get(HEADLINE_API(payload))
     commit('addHeadlines', data.articles)
   },
   async getSearchResult ({ commit }, payload) {
-    let { data } = await axios.get(SEARCH_API(payload))
-    let articles = data.articles
+    const { data } = await axios.get(SEARCH_API(payload))
+    const articles = data.articles
     commit('addSearchResult', { articles })
   }
 }

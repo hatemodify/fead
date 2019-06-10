@@ -21,7 +21,9 @@
           <li>
             <router-link to="/myscrap">나의 스크랩</router-link>
           </li>
-          <li>관심사 모아보기</li>
+          <li>
+            <router-link to="/myinterest">관심사 모아보기</router-link>
+          </li>
           <li>마이페이지</li>
         </ul>
         <div class v-else>
@@ -34,7 +36,9 @@
             :client_id="CLIENT_ID"
             :onSuccess="onSuccess"
             class="btn_login"
-          >Login</GoogleLogin>
+          >
+            <img src="https://cdn2.iconfinder.com/data/icons/social-icons-33/128/Google-24.png"> Login
+          </GoogleLogin>
         </div>
       </nav>
       <button class="btn_logout" v-if="loginState" @click="logout">
@@ -47,7 +51,7 @@
 <script>
 import GoogleLogin from 'vue-google-login'
 import { DEFAULT_PROFILE } from '@/utils/constants'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import { CLIENT_ID } from '@/utils/constants'
 export default {
   components: {
@@ -75,16 +79,17 @@ export default {
   },
   methods: {
     onSuccess(googleUser) {
-      console.log(googleUser.getBasicProfile())
-      this.login()
       this.setUserInfo(googleUser.getBasicProfile())
+      this.user(googleUser.getBasicProfile())
+      this.login()
     },
     logout() {
       this.login()
       this.setUserInfo()
     },
     ...mapMutations({ login: 'loginState' }),
-    ...mapMutations({ setUserInfo: 'setUserInfo' })
+    ...mapMutations({ setUserInfo: 'setUserInfo' }),
+    ...mapActions({ user: 'getUserInfo' })
   }
 }
 </script>
@@ -102,10 +107,14 @@ export default {
   width: 100%;
   height: 40px;
   background: #000;
+  border: 1px solid #e3e3e3;
   color: #fff;
   font-family: ns;
   font-size: 15px;
   text-transform: uppercase;
+  img {
+    margin-right: 10px;
+  }
 }
 .btn_logout {
   background: none;

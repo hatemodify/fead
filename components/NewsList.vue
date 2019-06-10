@@ -23,7 +23,11 @@ import NewsThumb from '@/components/NewsThumb.vue'
 import { convertDate } from '@/utils'
 export default {
   name: 'newslist',
-  props: ['articles'],
+  props: {
+    articles: {
+      type: Array
+    }
+  },
   components: {
     NewsThumb
   },

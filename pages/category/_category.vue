@@ -1,30 +1,14 @@
 <template>
-  <div class="category_cont">
+  <article class="common_cont">
     <preloader :load="loading"/>
     <page-title :title="category"/>
-    <ul class="list_news">
-      <li v-for="item in articles[category]" :key="item.id">
-        <a :href="item.url" target="_blank">
-          <picture class="wrap_thumb">
-            <news-thumb :imgSource="item.urlToImage"/>
-          </picture>
-          <div class="wrap_info">
-            <strong class="news_subject">{{item.title}}</strong>
-            <p class="news_desc">{{item.description}}</p>
-            <div class="cf">
-              <span class="txt_source">{{item.source.name}}</span>
-              <span class="txt_date">{{convertDate(item.publishedAt)}}</span>
-            </div>
-          </div>
-        </a>
-      </li>
-    </ul>
-  </div>
+    <news-list :articles="articles[category]"/>
+  </article>
 </template>
 
 <script>
 import axios from 'axios'
-import { PageTitle, NewsThumb, Preloader } from '@/components'
+import { PageTitle, NewsList, Preloader } from '@/components'
 import { convertDate } from '@/utils'
 import { API_KEY } from '@/utils/constants'
 import { CATEGORY_API } from '@/utils/api'
@@ -40,7 +24,7 @@ export default {
       category: this.$route.params.category
     }
   },
-  components: { PageTitle, NewsThumb, Preloader },
+  components: { PageTitle, Preloader, NewsList },
   computed: mapGetters({
     articles: 'news/getCategoryArticles'
   }),

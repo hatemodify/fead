@@ -1,9 +1,11 @@
+import axios from 'axios'
 export const state = () => ({
   preloader: false,
   searchState: false,
   searchQuery: '',
   login: false,
-  userInfo: {}
+  userInfo: {},
+  interest: []
 })
 
 export const mutations = {
@@ -19,6 +21,9 @@ export const mutations = {
   },
   setUserInfo (state, payload) {
     state.userInfo = { ...payload }
+  },
+  setInterest (state, payload) {
+    state.interest = payload
   }
 }
 
@@ -37,5 +42,18 @@ export const getters = {
   },
   getUserInfo (state) {
     return state.userInfo
+  },
+  getInt (state) {
+    return state.interest
+  }
+}
+
+export const actions = {
+  async getUserInfo ({}, payload) {
+    const userInfo = await axios.post(`/userInfo`, payload)
+  },
+  async getInterest ({ state }) {
+    const interest = await axios.get(`/interest/${state.userInfo.Eea}`)
+    mutations.setInterest(interest)
   }
 }

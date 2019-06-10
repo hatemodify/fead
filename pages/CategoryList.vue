@@ -1,5 +1,4 @@
 <template>
-  <!-- <router-link v-bind:to="{ name: 'Search' , params: { query: query } }" class="btn_search"></router-link> -->
   <ul class="list_category">
     <li
       v-for="cate in CATEGORY"
