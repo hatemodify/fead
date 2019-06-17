@@ -3,7 +3,7 @@
     <page-title>
       <slot>나의 관심사</slot>
     </page-title>
-    {{myInterest}}
+    {{myInterest.length}}
   </article>
 </template>
 
