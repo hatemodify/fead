@@ -43,7 +43,7 @@ export const getters = {
   getUserInfo (state) {
     return state.userInfo
   },
-  getInt (state) {
+  getInterest (state) {
     return state.interest
   }
 }
@@ -54,6 +54,13 @@ export const actions = {
   },
   async getInterest ({ state }) {
     const interest = await axios.get(`/interest/${state.userInfo.Eea}`)
-    mutations.setInterest(interest)
+    console.log(interest)
+    // mutations.setInterest(interest)
+  },
+  async addBookmark ({ state }, payload) {
+    const bookmark = await axios.put(
+      `addbookmark/${state.userInfo.Eea}`,
+      payload
+    )
   }
 }

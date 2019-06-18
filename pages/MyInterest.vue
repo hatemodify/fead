@@ -3,7 +3,7 @@
     <page-title>
       <slot>나의 관심사</slot>
     </page-title>
-    {{myInterest.length}}
+    {{myInterest}}
   </article>
 </template>
 
@@ -18,7 +18,7 @@ export default {
     NewsList
   },
   computed: mapGetters({
-    myInterest: 'getInt'
+    myInterest: 'getInterest'
   }),
   data() {
     return {

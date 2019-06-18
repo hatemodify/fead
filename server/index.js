@@ -50,14 +50,27 @@ app.post('/userInfo/', (req, res) => {
       })
       addUser.save(err => err || 'success')
     } else {
-      res.send('login success')
+      res.send(userInfo)
     }
   })
 })
 app.get('/interest/:id', (req, res) => {
   const id = req.params.id
   USER.findOne({ user_id: id }, (err, data) => {
-    data.interest ? res.send(data.interest) : res.send(null)
+    res.send(data.interest)
   })
+})
+app.put('/addbookmark/:id', (req, res) => {
+  USER.findOneAndUpdate(
+    { user_id: req.params.id },
+    {
+      $push: {
+        scrap: req.body
+      }
+    },
+    success => {
+      console.log('success')
+    }
+  )
 })
 start()

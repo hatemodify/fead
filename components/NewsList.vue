@@ -1,6 +1,7 @@
 <template>
   <ul class="list_news">
     <li v-for="item in articles" :key="item.id">
+      <bookmark :newsData="item"/>
       <a :href="item.url" target="_blank">
         <picture class="wrap_thumb">
           <news-thumb :imgSource="item.urlToImage"/>
@@ -20,6 +21,7 @@
 
 <script>
 import NewsThumb from '@/components/NewsThumb.vue'
+import Bookmark from '@/components/Bookmark.vue'
 import { convertDate } from '@/utils'
 export default {
   name: 'newslist',
@@ -29,7 +31,8 @@ export default {
     }
   },
   components: {
-    NewsThumb
+    NewsThumb,
+    Bookmark
   },
   data() {
     return {
