@@ -5,7 +5,8 @@ export const state = () => ({
   searchQuery: '',
   login: false,
   userInfo: {},
-  interest: []
+  interest: [],
+  scrap: []
 })
 
 export const mutations = {
@@ -24,6 +25,10 @@ export const mutations = {
   },
   setInterest (state, payload) {
     state.interest = payload
+  },
+  setScrap (state, payload) {
+    const scrap = state.scrap
+    state.scrap = [scrap, ...payload]
   }
 }
 
@@ -45,6 +50,9 @@ export const getters = {
   },
   getInterest (state) {
     return state.interest
+  },
+  getScrap (state) {
+    return state.scrap
   }
 }
 
@@ -62,5 +70,10 @@ export const actions = {
       `addbookmark/${state.userInfo.Eea}`,
       payload
     )
+  },
+  async getScrapList ({ commit, state }) {
+    const scrap = await axios.get(`scrap/${state.userInfo.Eea}`)
+    console.log(scrap.data)
+    commit('setScrap', scrap.data)
   }
 }

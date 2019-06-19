@@ -73,4 +73,10 @@ app.put('/addbookmark/:id', (req, res) => {
     }
   )
 })
+app.get('/scrap/:id', (req, res) => {
+  USER.findOne({ user_id: req.params.id }, (err, data) => {
+    res.send(data.scrap)
+    console.log(data.scrap)
+  })
+})
 start()

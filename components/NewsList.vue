@@ -1,7 +1,9 @@
 <template>
   <ul class="list_news">
     <li v-for="item in articles" :key="item.id">
-      <btn-scrap :newsData="item"/>
+      <template v-if="scrap">
+        <btn-scrap :newsData="item"/>
+      </template>
       <a :href="item.url" target="_blank">
         <picture class="wrap_thumb">
           <news-thumb :imgSource="item.urlToImage"/>
@@ -28,8 +30,13 @@ export default {
   props: {
     articles: {
       type: Array
+    },
+    scrap: {
+      type: Boolean,
+      default: true
     }
   },
+
   components: {
     NewsThumb,
     BtnScrap
