@@ -3,10 +3,13 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   props: ['newsData'],
+  computed: mapGetters({
+    loginState: 'getLoginState'
+  }),
   data() {
     return {
       bookmark: false
@@ -15,8 +18,12 @@ export default {
   methods: {
     ...mapActions({ add: 'addBookmark' }),
     addBookmark(payload) {
-      this.add(payload)
-      this.bookmark = !this.bookmark
+      if (this.loginState) {
+        this.add(payload)
+        this.bookmark = !this.bookmark
+      } else {
+        alert('로그인 해 주세요')
+      }
     }
   }
 }
